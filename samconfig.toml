@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "month-end-notification"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-38q82pkmbade"
+s3_prefix = "month-end-notification"
+region = "ap-northeast-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
