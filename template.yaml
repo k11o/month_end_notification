@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  SlackWebhookUlr:
+    Description: "Slack Webhook URL"
+    Type: "String"
+  LastDayText:
+    Description: "Last day notification text"
+    Type: "String"
+  DayBeforeLastDayText:
+    Description: "Day before last day notification text"
+    Type: "String"
+  HolidayEndpointUrl:
+    Description: "Holiday endpoint url"
+    Type: "String"
+Description: >
+  month_end_notification
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  NotificationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: notification_function
+      Handler: notification/app.lambda_handler
+      Runtime: python3.9
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: !Ref SlackWebhookUlr
+          LAST_DAY_TEXT: !Ref LastDayText
+          DAY_BEFORE_LAST_DAY_TEXT: !Ref DayBeforeLastDayText
+          HOLIDAY_ENDPOINT_URL: !Ref HolidayEndpointUrl
+      Events:
+        CWSchedule:
+          Type: Schedule
+          Properties:
+            Schedule: 'cron(0 9 25-31 * ? *)'
+            Name: MonthLateSchedule
+            Description: Schedule for month end notification
+            Enabled: True
+
+Outputs:
+  NotificationFunction:
+    Description: "Notification Function ARN"
+    Value: !GetAtt NotificationFunction.Arn
