@@ -15,4 +15,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
       - run: sam build --use-container
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset  --parameter-overrides ParameterKey=SlackWebhookUlr,ParameterValue=${{ secrets.SLACK_WEBHOOK_URL }} ParameterKey=LastDayText,ParameterValue=${{ secrets.LAST_DAY_TEXT }} ParameterKey=DayBeforeLastDayText,ParameterValue=${{ secrets.DAY_BEFORE_LAST_DAY_TEXT }} ParameterKey=HolidayEndpointUrl,ParameterValue=${{ secrets.HOLIDAY_ENDPOINT_URL }}
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset  --parameter-overrides 'SlackWebhookUlr=${{ secrets.SLACK_WEBHOOK_URL }} LastDayText=${{ secrets.LAST_DAY_TEXT }} DayBeforeLastDayText=${{ secrets.DAY_BEFORE_LAST_DAY_TEXT }} HolidayEndpointUrl=${{ secrets.HOLIDAY_ENDPOINT_URL }}'
