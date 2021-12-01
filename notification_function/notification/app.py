@@ -33,6 +33,8 @@ class DateTypeManager():
             # 木曜も土日が月末じゃないかどうかを判定する この場合は月末
             # 月末前の木曜もTRUE。また、月末二日前もTRUE
             return self.DAY_BEFORE_LAST_DAY
+        else:
+            return self.NORMAL_DAY
 
 
 def lambda_handler(event, context):
