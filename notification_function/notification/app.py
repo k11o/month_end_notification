@@ -29,9 +29,12 @@ class DateTypeManager():
             # 金は土日が月末じゃないかどうかを判定する必要がある。
             # 上記 true の場合は月末
             return self.LAST_DAY
-        elif (today.weekday() == 3 and today.day >= lastdate - 3) or today.day == lastdate - 1:
+        elif (today.weekday() == 3 and today.day >= lastdate - 3) \
+                or today.day == lastdate - 1 \
+                or (today.weekday() == 4 and today.day == lastdate - 3):
             # 木曜も土日が月末じゃないかどうかを判定する この場合は月末
             # 月末前の木曜もTRUE。また、月末二日前もTRUE
+            # 翌週月曜が月末の場合の金曜もTRUE
             return self.DAY_BEFORE_LAST_DAY
         else:
             return self.NORMAL_DAY

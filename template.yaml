@@ -36,7 +36,7 @@ Resources:
         CWSchedule:
           Type: Schedule
           Properties:
-            Schedule: 'cron(0 9 25-31 * ? *)'
+            Schedule: 'cron(0 5 25-31 * ? *)'
             Name: MonthLateSchedule
             Description: Schedule for month end notification
             Enabled: True
